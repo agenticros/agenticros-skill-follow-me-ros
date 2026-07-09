@@ -1,5 +1,5 @@
 {
-  "name": "@agenticros-skills/follow-me-ros",
+  "name": "@agenticros/follow-me-ros",
   "version": "0.1.0",
   "type": "module",
   "description": "External ROS-node skill: start/stop the on-robot agenticros_follow_me node via ROS services.",
