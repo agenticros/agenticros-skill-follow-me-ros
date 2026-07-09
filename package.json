@@ -1,5 +1,5 @@
 {
-  "name": "agenticros-skill-follow-me-ros",
+  "name": "@agenticros-skills/follow-me-ros",
   "version": "0.1.0",
   "type": "module",
   "description": "External ROS-node skill: start/stop the on-robot agenticros_follow_me node via ROS services.",
@@ -55,8 +55,12 @@
           }
         },
         "outputs": {
-          "success": { "type": "boolean" },
-          "message": { "type": "string" }
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string"
+          }
         },
         "interruptible": true,
         "blocks_base": true,
@@ -80,8 +84,12 @@
           }
         },
         "outputs": {
-          "success": { "type": "boolean" },
-          "message": { "type": "string" }
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string"
+          }
         },
         "interruptible": true,
         "blocks_base": true,
@@ -99,5 +107,8 @@
     "typescript": "^5.7.0"
   },
   "author": "AgenticROS",
-  "license": "Apache-2.0"
+  "license": "Apache-2.0",
+  "publishConfig": {
+    "access": "public"
+  }
 }
