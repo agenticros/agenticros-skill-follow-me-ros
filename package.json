@@ -1,0 +1,103 @@
+{
+  "name": "agenticros-skill-follow-me-ros",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "External ROS-node skill: start/stop the on-robot agenticros_follow_me node via ROS services.",
+  "keywords": [
+    "agenticros",
+    "ros2",
+    "follow",
+    "person-following",
+    "mediapipe"
+  ],
+  "homepage": "https://github.com/agenticros/agenticros-skill-follow-me-ros#readme",
+  "bugs": {
+    "url": "https://github.com/agenticros/agenticros-skill-follow-me-ros/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/agenticros/agenticros-skill-follow-me-ros.git"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit"
+  },
+  "agenticros": {
+    "id": "follow-me-ros",
+    "displayName": "Follow Me (ROS)",
+    "description": "Call the on-robot agenticros_follow_me services (MediaPipe pose on the robot) instead of the in-gateway YOLO follow loop. Requires agenticros_follow_me running.",
+    "categories": [
+      "navigation",
+      "follow"
+    ],
+    "capabilities": [
+      {
+        "id": "follow_person_ros",
+        "verb": "follow",
+        "description": "Start on-robot person following via follow_me/start.",
+        "inputs": {
+          "target_description": {
+            "type": "string",
+            "description": "Optional person description; empty = closest person.",
+            "optional": true
+          },
+          "request": {
+            "type": "object",
+            "description": "Full FollowMeStart request override.",
+            "optional": true
+          }
+        },
+        "outputs": {
+          "success": { "type": "boolean" },
+          "message": { "type": "string" }
+        },
+        "interruptible": true,
+        "blocks_base": true,
+        "implementation": {
+          "kind": "external_ros_node",
+          "package": "agenticros_follow_me",
+          "launch": "ros2 run agenticros_follow_me follow_me_node",
+          "service": "follow_me/start",
+          "msg_type": "agenticros_msgs/srv/FollowMeStart"
+        }
+      },
+      {
+        "id": "stop_follow_person_ros",
+        "verb": "follow",
+        "description": "Stop on-robot person following via follow_me/stop.",
+        "inputs": {
+          "request": {
+            "type": "object",
+            "description": "FollowMeStop request (usually {}).",
+            "optional": true
+          }
+        },
+        "outputs": {
+          "success": { "type": "boolean" },
+          "message": { "type": "string" }
+        },
+        "interruptible": true,
+        "blocks_base": true,
+        "implementation": {
+          "kind": "external_ros_node",
+          "package": "agenticros_follow_me",
+          "service": "follow_me/stop",
+          "msg_type": "agenticros_msgs/srv/FollowMeStop"
+        }
+      }
+    ]
+  },
+  "devDependencies": {
+    "@types/node": "^20.17.0",
+    "typescript": "^5.7.0"
+  },
+  "author": "AgenticROS",
+  "license": "Apache-2.0"
+}
