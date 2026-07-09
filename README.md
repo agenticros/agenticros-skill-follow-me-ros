@@ -5,7 +5,7 @@ Wraps the in-repo [`agenticros_follow_me`](https://github.com/agenticros/agentic
 This is **not** the same as the marketplace `followme` / in-gateway YOLO skill — perception and control run on the robot.
 
 ```bash
-npx agenticros skills install agenticros/follow-me-ros
+npx agenticros skills install chrismatthieu/follow-me-ros
 ```
 
 ## Bringup
